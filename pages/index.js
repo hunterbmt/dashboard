@@ -2,64 +2,33 @@ import Dashboard from '../components/dashboard'
 
 // Widgets
 import DateTime from '../components/widgets/datetime'
-import PageSpeedInsightsScore from '../components/widgets/pagespeed-insights/score'
-import PageSpeedInsightsStats from '../components/widgets/pagespeed-insights/stats'
 import JiraIssueCount from '../components/widgets/jira/issue-count'
-import SonarQube from '../components/widgets/sonarqube'
-import Jenkins from '../components/widgets/jenkins'
-import BitbucketPullRequestCount from '../components/widgets/bitbucket/pull-request-count'
-import ElasticsearchHitCount from '../components/widgets/elasticsearch/hit-count'
-import GitHubIssueCount from '../components/widgets/github/issue-count'
+import JiraUpcomingRelease from '../components/widgets/jira/upcomingRelease'
+import VisualStudioBuildStatus from '../components/widgets/visualstudio/BuildStatus'
+import VisualStudioPullRequest from '../components/widgets/visualstudio/PullRequest'
 
 // Theme
-import lightTheme from '../styles/light-theme'
-// import darkTheme from '../styles/dark-theme'
+// import lightTheme from '../styles/light-theme'
+import darkTheme from '../styles/dark-theme'
 
 export default () => (
-  <Dashboard theme={lightTheme}>
+  <Dashboard theme={darkTheme}>
     <DateTime />
-
-    <PageSpeedInsightsScore url='https://github.com' />
-
-    <PageSpeedInsightsStats url='https://github.com' />
-
-    <JiraIssueCount
-      title='JIRA Open Bugs'
-      url='https://crossorigin.me/https://jira.atlassian.com'
-      query='type=Bug AND project="Bitbucket Server" AND resolution=Unresolved ORDER BY priority DESC,created DESC'
+    <JiraUpcomingRelease projectId='IZ' url='https://izenda.atlassian.net'/>
+    <JiraIssueCount title='Open Customer Blocking'
+      url='https://izenda.atlassian.net'
+      query='type=Bug AND project="IZ" AND priority="Customer Blocking" AND status not in (Closed, Done, Released)'
     />
-
-    <BitbucketPullRequestCount
-      title='Bitbucket Open PR'
-      url='https://crossorigin.me/https://bitbucket.typo3.com'
-      project='EXT'
-      repository='blog'
+    <VisualStudioBuildStatus
+      url='https://gacode.visualstudio.com'
+      project='Synergy'
+      definationIds='136,127,128,137'
     />
-
-    <SonarQube
-      url='https://crossorigin.me/https://sonarcloud.io'
-      componentKey='com.icegreen:greenmail-parent'
-    />
-
-    <Jenkins
-      url='https://crossorigin.me/https://builds.apache.org'
-      jobs={[
-        { label: 'Hadoop', path: 'Hadoop-trunk-Commit' },
-        { label: 'Jackrabbit', path: 'Jackrabbit-trunk' },
-        { label: 'JMeter', path: 'JMeter-trunk' }
-      ]}
-    />
-
-    <ElasticsearchHitCount
-      title='Log Hits'
-      url='https://crossorigin.me/http://ec2-34-210-144-223.us-west-2.compute.amazonaws.com:9200'
-      index='blog'
-      query='user:dilbert'
-    />
-
-    <GitHubIssueCount
-      owner='danielbayerlein'
-      repository='dashboard'
+    <VisualStudioPullRequest
+      url='https://gacode.visualstudio.com'
+      project='Synergy'
+      repositoryIds='0ea0c267-d44c-4071-b44e-efa393c4141a'
+      width='50em'
     />
   </Dashboard>
 )

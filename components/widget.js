@@ -13,13 +13,14 @@ const Container = styled.div`
   justify-content: center;
   margin: 1em;
   padding: 1em;
+  width: ${props => props.width}
 `
 
 const Title = styled.h1`
   text-align: center;
 `
 
-export default ({ children, error = false, loading = false, title = '' }) => {
+export default ({ children, error = false, loading = false, title = '', width}) => {
   let content
 
   if (loading) {
@@ -31,7 +32,7 @@ export default ({ children, error = false, loading = false, title = '' }) => {
   }
 
   return (
-    <Container>
+    <Container width={width}>
       {title ? <Title>{title}</Title> : ''}
       {content}
     </Container>

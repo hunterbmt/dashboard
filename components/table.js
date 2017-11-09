@@ -5,7 +5,7 @@ export default styled.table`
 `
 
 export const Th = styled.th`
-  text-align: right;
+  text-align: left;
 `
 
 export const Td = styled.td`

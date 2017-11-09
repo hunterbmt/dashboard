@@ -39,11 +39,11 @@ export default class JiraIssueCount extends Component {
   }
 
   async fetchInformation () {
-    const { authKey, url, query } = this.props
+    const { authKey ='jira', url, query } = this.props
     const opts = authKey ? { headers: basicAuthHeader(authKey) } : {}
 
     try {
-      const res = await fetch(`${url}/rest/api/2/search?jql=${query}`, opts)
+      const res = await fetch(`${url}/rest/api/2/search?jql=${query}&maxResults=1`, opts)
       const json = await res.json()
 
       this.setState({ count: json.total, error: false, loading: false })

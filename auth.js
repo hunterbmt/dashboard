@@ -22,5 +22,9 @@ export default {
   github: {
     username: process.env.GITHUB_USER,
     password: process.env.GITHUB_PASS
+  },
+  vs: {
+    username: process.env.VS_USER,
+    password: process.env.VS_PASS
   }
 }
